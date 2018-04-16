@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>Form-Driven / Model-Driven | 江江好</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta name="description" content="Form-Driven還沒準備, 加油好嗎 Model-Driven實作 Model-Driven , 必須要： 先 import ReactiveFormModule 到 app.module.ts 開啟 html, 在 Form 元素加上 [formGroup]=&amp;quot;form&amp;quot;123&amp;lt;form [formGroup]=&amp;quot;form&amp;quot;&amp;gt; 	...&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Form-Driven &#x2F; Model-Driven">
+<meta property="og:url" content="http://chrischiang410.github.io/blog/testpost/index.html">
+<meta property="og:site_name" content="江江好">
+<meta property="og:description" content="Form-Driven還沒準備, 加油好嗎 Model-Driven實作 Model-Driven , 必須要： 先 import ReactiveFormModule 到 app.module.ts 開啟 html, 在 Form 元素加上 [formGroup]=&amp;quot;form&amp;quot;123&amp;lt;form [formGroup]=&amp;quot;form&amp;quot;&amp;gt; 	...&amp;">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2016-11-17T09:39:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Form-Driven &#x2F; Model-Driven">
+<meta name="twitter:description" content="Form-Driven還沒準備, 加油好嗎 Model-Driven實作 Model-Driven , 必須要： 先 import ReactiveFormModule 到 app.module.ts 開啟 html, 在 Form 元素加上 [formGroup]=&amp;quot;form&amp;quot;123&amp;lt;form [formGroup]=&amp;quot;form&amp;quot;&amp;gt; 	...&amp;">
+
+  
+    <link rel="alternate" href="/atom.xml" title="江江好" type="application/atom+xml" />
+  
+
+  
+  <!--[if lte IE 10 ]><link rel="shortcut icon" href="/images/favicon.ico"><![endif]-->
+  <!--[if !IE]><!-->
+  <link rel="shortcut icon" href="/images/favicon.png">
+
+  <meta name="msapplication-TileImage" content="/images/favicon.png"/>
+  <meta name="msapplication-TileColor" content="#000000"/>
+
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon-57x57.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/apple-touch-icon-144x144.png" />
+
+  <link rel="icon" sizes="256x256" href="/images/favicon.png" />
+  <!--<![endif]-->
+  
+
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro|Material+Icons|Raleway:400,300,700" rel="stylesheet" type="text/css" />
+
+  <link rel="stylesheet" href="/css/vendors.css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+
+  <script src="/js/vendors.js"></script>
+
+  <script>
+    define('jquery', function () {
+      return window.jQuery;
+    });
+  </script>
+
+
+</head>
+<body>
+
+  <div class="navbar-fixed">
+  <nav id="main-navbar" class="grey lighten-5 z-depth-0" role="navigation">
+    <div class="nav-wrapper container">
+
+      <a id="logo-container" href="/" class="brand-logo center-align">
+        <span>江江好</span>
+        <sub>Work Hard, Play Hard</sub>
+      </a>
+
+      <ul class="right hide-on-med-and-down">
+        
+          <li>
+            <a class="main-nav-link" href="/about">About</a>
+          </li>
+        
+          <li>
+            <a class="main-nav-link" href="/work">Work</a>
+          </li>
+        
+          <li>
+            <a class="main-nav-link" href="/blog">Blog</a>
+          </li>
+        
+      </ul>
+
+      <a href="#" data-activates="nav-mobile" class="button-collapse">
+        <i class="material-icons">menu</i>
+      </a>
+    </div>
+  </nav>
+</div>
+
+<ul id="nav-mobile" class="side-nav">
+  
+  <li>
+    <a class="main-nav-link" href="/about">About</a>
+  </li>
+  
+  <li>
+    <a class="main-nav-link" href="/work">Work</a>
+  </li>
+  
+  <li>
+    <a class="main-nav-link" href="/blog">Blog</a>
+  </li>
+  
+</ul>
+
+
+  <div id="main-container">
+    
+<div class="container">
+  <div class="row">
+    <div class="col s12">
+
+
+      <article id="post-testpost" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 class="article-title header" itemprop="name">
+      Form-Driven / Model-Driven
+    </h1>
+  
+
+
+          
+            
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2016-11-13T03:12:39.000Z" itemprop="datePublished">Nov 13, 2016</time>
+            </div>
+          
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <h2 id="Form-Driven"><a href="#Form-Driven" class="headerlink" title="Form-Driven"></a>Form-Driven</h2><h5 id="還沒準備-加油好嗎"><a href="#還沒準備-加油好嗎" class="headerlink" title="還沒準備, 加油好嗎"></a>還沒準備, 加油好嗎</h5><hr>
+<h2 id="Model-Driven"><a href="#Model-Driven" class="headerlink" title="Model-Driven"></a>Model-Driven</h2><h3 id="實作-Model-Driven-必須要："><a href="#實作-Model-Driven-必須要：" class="headerlink" title="實作 Model-Driven , 必須要："></a>實作 Model-Driven , 必須要：</h3><ul>
+<li>先 import <code>ReactiveFormModule</code> 到 <code>app.module.ts</code></li>
+<li>開啟 html, 在 Form 元素加上 <code>[formGroup]=&quot;form&quot;</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;form [formGroup]=&quot;form&quot;&gt;</span><br><span class="line"> 	...</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<ul>
+<li>回到 ts, import <code>FormGroup</code> 與 <code>FormControl</code>兩個類別, 並建立名為 <code>form</code> 的 form model <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Component &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; FormGroup, FormControl &#125; <span class="keyword">from</span> <span class="string">'@angular/forms'</span>;</span><br><span class="line">@Component(&#123;</span><br><span class="line">  selector: <span class="string">'app-root'</span>,</span><br><span class="line">  templateUrl: <span class="string">'./app.component.html'</span>,</span><br><span class="line">  styleUrls: [<span class="string">'./app.component.css'</span>]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">AppComponent</span> </span>&#123;</span><br><span class="line">  form;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="keyword">this</span>.form = <span class="keyword">new</span> FormGroup(&#123;</span><br><span class="line">      username: <span class="keyword">new</span> FormControl(),</span><br><span class="line">      age: <span class="keyword">new</span> FormControl(),</span><br><span class="line">      interest: <span class="keyword">new</span> FormGroup(&#123;</span><br><span class="line">        movie: <span class="keyword">new</span> FormControl(),</span><br><span class="line">        music: <span class="keyword">new</span> FormControl(),</span><br><span class="line">		shopping: <span class="keyword">new</span> FormControl()</span><br><span class="line">      &#125;),</span><br><span class="line">      sex: <span class="keyword">new</span> FormControl()</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h3 id="讓我們簡化一下"><a href="#讓我們簡化一下" class="headerlink" title="讓我們簡化一下"></a>讓我們簡化一下</h3><ul>
+<li>透過 Angular 提供的 FormBuilder, 可以取代每次都要 new FormGroup 與 FormControl 類別的步驟<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Component &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; FormBuilder &#125; <span class="keyword">from</span> <span class="string">'@angular/forms'</span>;</span><br><span class="line">@Component(&#123;</span><br><span class="line">  selector: <span class="string">'app-root'</span>,</span><br><span class="line">  templateUrl: <span class="string">'./app.component.html'</span>,</span><br><span class="line">  styleUrls: [<span class="string">'./app.component.css'</span>]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">AppComponent</span> </span>&#123;</span><br><span class="line">  form;</span><br><span class="line">  <span class="keyword">constructor</span>(private _fb: FormBuilder) &#123;</span><br><span class="line">    <span class="keyword">this</span>.form = <span class="keyword">this</span>._fb.group(&#123;</span><br><span class="line">      username: <span class="string">'Chris'</span>,</span><br><span class="line">      age: <span class="string">''</span>,</span><br><span class="line">      interest: <span class="keyword">this</span>._fb.group(&#123;</span><br><span class="line">        movie: <span class="string">''</span>,</span><br><span class="line">        music: <span class="string">''</span>,</span><br><span class="line">		shopping: <span class="string">''</span></span><br><span class="line">      &#125;),</span><br><span class="line">      sex: <span class="string">''</span></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h3 id="綁定表單控制項"><a href="#綁定表單控制項" class="headerlink" title="綁定表單控制項"></a>綁定表單控制項</h3><ul>
+<li>在控制項的地方, 以 Directive <code>formControlName</code> 取代 <code>name</code> 屬性 </li>
+<li>由於 form Model 的 interest 也建立了 formGroup 區塊, 因此記得在 html 綁上 <code>formGroupName</code>：<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> [<span class="attr">formGroup</span>]=<span class="string">"form"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">label</span> <span class="attr">class</span>=<span class="string">"control-label"</span>&gt;</span>姓名<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">formControlName</span>=<span class="string">"username"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">label</span> <span class="attr">class</span>=<span class="string">"control-label"</span>&gt;</span>年齡<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"number"</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">formControlName</span>=<span class="string">"age"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group"</span> <span class="attr">formGroupName</span>=<span class="string">"interest"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">label</span> <span class="attr">class</span>=<span class="string">"control-label"</span>&gt;</span>興趣<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">label</span>&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">formControlName</span>=<span class="string">"movie"</span> <span class="attr">value</span>=<span class="string">"movie"</span>&gt;</span> 看電影</span><br><span class="line">        <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">label</span>&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">formControlName</span>=<span class="string">"music"</span> <span class="attr">value</span>=<span class="string">"music"</span>&gt;</span> 聽音樂</span><br><span class="line">        <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">label</span>&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">formControlName</span>=<span class="string">"shopping"</span> <span class="attr">value</span>=<span class="string">"shopping"</span>&gt;</span> 購物</span><br><span class="line">        <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">label</span> <span class="attr">class</span>=<span class="string">"control-label"</span>&gt;</span>性別<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">label</span>&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">formControlName</span>=<span class="string">"sex"</span> <span class="attr">value</span>=<span class="string">"male"</span>/&gt;</span> 男</span><br><span class="line">	<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">label</span>&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">formControlName</span>=<span class="string">"sex"</span> <span class="attr">value</span>=<span class="string">"female"</span>/&gt;</span> 女</span><br><span class="line">	<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+
+            
+          </div>
+
+          
+          
+          <footer class="article-footer">
+            <a data-url="http://chrischiang410.github.io/blog/testpost/" data-id="cjg1yulyn0000x5paxauu5gaq" class="article-share-link">Share</a>
+            
+            
+          </footer>
+          
+        </div>
+
+        
+          
+<nav id="article-nav" class="white">
+  <div class="nav-wrapper">
+    <ul class="row">
+    
+
+    
+      <li class="col s6">
+        <a href="/blog/hello-world/" id="article-nav-older" class="article-nav-link-wrap grey-text text-darken-1 right-align truncate">
+          <span class="article-nav-title">終於又要開始寫作人生了</span>
+          <i class="fa fa-arrow-right"></i>
+        </a>
+      </li>
+    
+
+    </ul>
+  </div>
+</nav>
+
+
+        
+      </article>
+
+
+      
+
+
+
+    </div>
+  </div>
+</div>
+
+
+  
+
+
+
+  </div>
+
+  <footer class="page-footer grey darken-2">
+    <div class="footer-copyright">
+      <div class="container">
+        &copy; 2018 Chris Chiang
+
+        <div class="right">
+          Powered by <a href="http://hexo.io/" rel="nofollow" class="white-text" target="_blank">Hexo</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/app.js"></script>
+
+</body>
+</html>
