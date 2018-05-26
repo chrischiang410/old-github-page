@@ -12,7 +12,7 @@
     width: 50%;
 }
 
-img {
+.exp-img > img {
     margin: 10px !important;
     margin-top: 0px !important;
     width:300px;
