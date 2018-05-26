@@ -6,6 +6,7 @@
     width: 48%;
     vertical-align: top;
     margin: 0;
+    text-align: justify;
 }
 .exp-detail > .exp-img{
     display: inline-block;
@@ -17,4 +18,10 @@
     margin-top: 0px !important;
     width:300px;
     height: 160px !important;
+}
+p:nth-child(even) {
+    padding-left: 20px !important;
+}
+p:nth-child(odd) {
+    padding-right: 20px !important;
 }
