@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>RxJS - Observable 初探 | 江江好</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta name="description" content="大綱 RxJS 介紹 Observable 範例  比較 Observable 與 Promise 結論">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RxJS - Observable 初探">
+<meta property="og:url" content="http://chrischiang410.github.io/blog/rxjs/index.html">
+<meta property="og:site_name" content="江江好">
+<meta property="og:description" content="大綱 RxJS 介紹 Observable 範例  比較 Observable 與 Promise 結論">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://s3.amazonaws.com/media-p.slid.es/uploads/263775/images/1763829/687474703a2f2f692e696d6775722e636f6d2f4149696d5138432e6a7067.jpeg">
+<meta property="og:image" content="http://i.imgur.com/R5GhToH.jpg">
+<meta property="og:updated_time" content="2018-06-03T08:07:52.479Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RxJS - Observable 初探">
+<meta name="twitter:description" content="大綱 RxJS 介紹 Observable 範例  比較 Observable 與 Promise 結論">
+<meta name="twitter:image" content="https://s3.amazonaws.com/media-p.slid.es/uploads/263775/images/1763829/687474703a2f2f692e696d6775722e636f6d2f4149696d5138432e6a7067.jpeg">
+
+  
+    <link rel="alternate" href="/atom.xml" title="江江好" type="application/atom+xml" />
+  
+
+  
+  <!--[if lte IE 10 ]><link rel="shortcut icon" href="/images/favicon.ico"><![endif]-->
+  <!--[if !IE]><!-->
+  <link rel="shortcut icon" href="/images/favicon.png">
+
+  <meta name="msapplication-TileImage" content="/images/favicon.png"/>
+  <meta name="msapplication-TileColor" content="#000000"/>
+
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon-57x57.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/apple-touch-icon-144x144.png" />
+
+  <link rel="icon" sizes="256x256" href="/images/favicon.png" />
+  <!--<![endif]-->
+  
+
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro|Material+Icons|Raleway:400,300,700" rel="stylesheet" type="text/css" />
+
+  <link rel="stylesheet" href="/css/vendors.css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+
+  <script src="/js/vendors.js"></script>
+
+  <script>
+    define('jquery', function () {
+      return window.jQuery;
+    });
+  </script>
+
+
+</head>
+<body>
+
+  <div class="navbar-fixed">
+  <nav id="main-navbar" class="grey lighten-5 z-depth-0" role="navigation">
+    <div class="nav-wrapper container">
+
+      <a id="logo-container" href="/" class="brand-logo center-align">
+        <span>江江好</span>
+        <sub>Work Hard, Play Hard</sub>
+      </a>
+
+      <ul class="right hide-on-med-and-down">
+        
+          <li>
+            <a class="main-nav-link" href="/">About</a>
+          </li>
+        
+          <li>
+            <a class="main-nav-link" href="/work">Work</a>
+          </li>
+        
+          <li>
+            <a class="main-nav-link" href="/blog">Blog</a>
+          </li>
+        
+      </ul>
+
+      <a href="#" data-activates="nav-mobile" class="button-collapse">
+        <i class="material-icons">menu</i>
+      </a>
+    </div>
+  </nav>
+</div>
+
+<ul id="nav-mobile" class="side-nav">
+  
+  <li>
+    <a class="main-nav-link" href="/">About</a>
+  </li>
+  
+  <li>
+    <a class="main-nav-link" href="/work">Work</a>
+  </li>
+  
+  <li>
+    <a class="main-nav-link" href="/blog">Blog</a>
+  </li>
+  
+</ul>
+
+
+  <div id="main-container">
+    
+<div class="container">
+  <div class="row">
+    <div class="col s12">
+
+
+      <article id="post-rxjs" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 class="article-title header" itemprop="name">
+      RxJS - Observable 初探
+    </h1>
+  
+
+
+          
+            
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2017-04-09T16:00:00.000Z" itemprop="datePublished">Apr 10, 2017</time>
+            </div>
+          
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <h2 id="大綱"><a href="#大綱" class="headerlink" title="大綱"></a>大綱</h2><ul>
+<li>RxJS 介紹</li>
+<li>Observable 範例 </li>
+<li>比較 Observable 與 Promise</li>
+<li>結論<a id="more"></a>
+</li>
+</ul>
+<hr>
+<h2 id="RxJS-介紹"><a href="#RxJS-介紹" class="headerlink" title="RxJS 介紹"></a>RxJS 介紹</h2><ul>
+<li>Reactive Programming</li>
+<li>Reactive Extensions (Rx)</li>
+</ul>
+<hr>
+<h2 id="Reactive-Programming"><a href="#Reactive-Programming" class="headerlink" title="Reactive Programming"></a>Reactive Programming</h2><p>“Programming with asynchronous data streams.”</p>
+<hr>
+<h2 id="什麼是-stream"><a href="#什麼是-stream" class="headerlink" title="什麼是 stream?"></a>什麼是 stream?</h2><p><del>好像是買遊戲的那個平台耶?</del></p>
+<p><img src="https://s3.amazonaws.com/media-p.slid.es/uploads/263775/images/1763829/687474703a2f2f692e696d6775722e636f6d2f4149696d5138432e6a7067.jpeg"></p>
+<hr>
+<h2 id="什麼是-stream-1"><a href="#什麼是-stream-1" class="headerlink" title="什麼是 stream?"></a>什麼是 stream?</h2><ul>
+<li>一段時間內的集合、序列、流</li>
+<li>可觀察的集合 ( Observable collections )</li>
+</ul>
+<hr>
+<h2 id="Reactive-Extensions"><a href="#Reactive-Extensions" class="headerlink" title="Reactive Extensions"></a>Reactive Extensions</h2><ul>
+<li>LinQ 的一種擴展 (lib)</li>
+<li>相依性低</li>
+<li>概念上 Rx = LinQ + Observable + Schedulers</li>
+</ul>
+<hr>
+<h2 id="LinQ"><a href="#LinQ" class="headerlink" title="LinQ"></a>LinQ</h2><ul>
+<li>Language Integrated Query</li>
+<li>.Net 的一種擴展 (lib)</li>
+<li>透過一般程式語言撰寫類似SQL語法求得SQL結果</li>
+</ul>
+<hr>
+<h2 id="Observable"><a href="#Observable" class="headerlink" title="Observable"></a>Observable</h2><ul>
+<li>可觀察的對象</li>
+<li>對象可為異步事件/數據流 ( asynchronous event/data stream )</li>
+</ul>
+<hr>
+<h2 id="Schedulers"><a href="#Schedulers" class="headerlink" title="Schedulers"></a>Schedulers</h2><ul>
+<li>thread controller<br>-Schedulers.immediate (default)<br>-Schedulers.newThread<br>-AndroidSchedulers.mainThread</li>
+</ul>
+<hr>
+<h2 id="Reactive-Extensions-其實是"><a href="#Reactive-Extensions-其實是" class="headerlink" title="Reactive Extensions 其實是"></a>Reactive Extensions 其實是</h2><p>“透過 LinQ operator 針對 Observable 在 Schedulers 指定的線程做處理”</p>
+<hr>
+<h2 id="Observable-解說"><a href="#Observable-解說" class="headerlink" title="Observable 解說"></a>Observable 解說</h2><ul>
+<li><p>Rx Operator</p>
+<ul>
+<li>Chaining Operators</li>
+<li>包含create、tramsfer、filter….等</li>
+</ul>
+</li>
+<li><p>冷熱 Observable</p>
+<ul>
+<li>冷：subscribe( ) </li>
+<li>熱：connect( )</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="Observable-範例"><a href="#Observable-範例" class="headerlink" title="Observable 範例"></a>Observable 範例</h2><p><a href="http://jsbin.com/xoxileyalu/1/edit?html,js,console" target="_blank" rel="noopener">範例連結一</a><br><a href="http://jsfiddle.net/4gGgs/589/" target="_blank" rel="noopener">範例連結二</a></p>
+<p>登登！！Observable is lazy！</p>
+<hr>
+<h2 id="回顧-Promise"><a href="#回顧-Promise" class="headerlink" title="回顧 Promise"></a>回顧 Promise</h2><ul>
+<li>三種狀態：pending、fulfill與 reject</li>
+<li>調用函數來處理”結果”</li>
+<li>Promise 本質上就是個 Observable</li>
+</ul>
+<hr>
+<h2 id="Promise-圖解"><a href="#Promise-圖解" class="headerlink" title="Promise 圖解"></a>Promise 圖解</h2><p><img src="http://i.imgur.com/R5GhToH.jpg"></p>
+<hr>
+<h2 id="比較-Observable-與-Promise"><a href="#比較-Observable-與-Promise" class="headerlink" title="比較 Observable 與 Promise"></a>比較 Observable 與 Promise</h2><p><a href="https://jsbin.com/satazomowi/1/edit?js,console" target="_blank" rel="noopener">範例連結</a></p>
+<ul>
+<li>Promise 創建時即執行, Observable 則否</li>
+<li>Promise 回傳單一結果, Observable 可回傳多個</li>
+<li>Observable 可拆解或組成非同步行為</li>
+<li>Observable 可被取消、重試, Promise 則否</li>
+</ul>
+<hr>
+<h2 id="比較表"><a href="#比較表" class="headerlink" title="比較表"></a>比較表</h2><p><table><br>    <thead><br>    <tr><br>        <th></th><br>        <th>Observable</th><br>        <th>Promise</th><br>    </tr><br>    </thead><br>    <tbody><br>        <tr><br>            <td><br>            Lazy<br>            </td><br>            <td align="center"><br>            是<br>            </td><br>            <td align="center"><br>            否<br>            </td><br>        </tr><br>        <tr><br>            <td><br>            回傳結果<br>            </td><br>            <td align="center"><br>            單一/多個<br>            </td><br>            <td align="center"><br>            單一<br>            </td><br>        </tr><br>        <tr><br>            <td><br>            能否取消<br>            </td><br>            <td align="center"><br>            能<br>            </td><br>            <td align="center"><br>            不能<br>            </td><br>        </tr><br>        <tr><br>            <td><br>            能否重試<br>            </td><br>            <td align="center"><br>            能<br>            </td><br>            <td align="center"><br>            不能<br>            </td><br>        </tr><br>        <tr><br>            <td><br>            可讀性<br>            </td><br>            <td align="center"><br>            較佳<br>            </td><br>            <td align="center"><br>            稍差<br>            </td><br>        </tr><br>    </tbody></table></p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><ul>
+<li>有什麼是 Promise 可以但 Observable 做不到的嗎 ?<br>– 沒有。<br>– 如果你願意, 甚至可將 Observable <a href="https://angular.io/docs/ts/latest/guide/server-communication.html" target="_blank" rel="noopener">轉成 Promise</a></li>
+<li>為何 Angular2 捨棄 Promise 採用 Observable ?<br>– <del>因為豆漿濃..</del> 因為 Rx 功能太強大啦！</li>
+<li>那什麼時候適合用 Promise / Observable 呢?<br>– 視需求決定</li>
+</ul>
+
+            
+          </div>
+
+          
+          
+          <footer class="article-footer">
+            <a data-url="http://chrischiang410.github.io/blog/rxjs/" data-id="cjhylr0p500090wp00jgob5c7" class="article-share-link">Share</a>
+            
+            
+          </footer>
+          
+        </div>
+
+        
+          
+<nav id="article-nav" class="white">
+  <div class="nav-wrapper">
+    <ul class="row">
+    
+      <li class="col s6">
+        <a href="/blog/karma/" id="article-nav-newer" class="article-nav-link-wrap grey-text text-darken-1 truncate">
+          <i class="fa fa-arrow-left"></i>
+          <span class="article-nav-title">Karma 測試框架</span>
+        </a>
+      </li>
+    
+
+    
+      <li class="col s6">
+        <a href="/blog/jwt/" id="article-nav-older" class="article-nav-link-wrap grey-text text-darken-1 right-align truncate">
+          <span class="article-nav-title">Json Web Token</span>
+          <i class="fa fa-arrow-right"></i>
+        </a>
+      </li>
+    
+
+    </ul>
+  </div>
+</nav>
+
+
+        
+      </article>
+
+
+      
+
+
+
+    </div>
+  </div>
+</div>
+
+
+  
+
+
+
+  </div>
+
+  <footer class="page-footer grey darken-2">
+    <div class="footer-copyright">
+      <div class="container">
+        &copy; 2018
+
+        <div class="right">
+          Powered by Chris Chiang
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/app.js"></script>
+
+</body>
+</html>

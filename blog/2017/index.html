@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8" />
   
-  <title>Blog: 2016 | 江江好</title>
+  <title>Blog: 2017 | 江江好</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <meta name="description" content="Chris&apos; Brain | All rights reserved">
 <meta property="og:type" content="website">
 <meta property="og:title" content="江江好">
-<meta property="og:url" content="http://chrischiang410.github.io/blog/2016/index.html">
+<meta property="og:url" content="http://chrischiang410.github.io/blog/2017/index.html">
 <meta property="og:site_name" content="江江好">
 <meta property="og:description" content="Chris&apos; Brain | All rights reserved">
 <meta property="og:locale" content="default">
@@ -117,7 +117,7 @@
       
         
 
-      <article id="post-model-driven" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-karma" class="article article-type-post" itemscope itemprop="blogPost">
 
         <div class="article-inner">
           
@@ -127,7 +127,7 @@
               
   
     <h1 itemprop="name" class="header">
-      <a class="article-title " href="/blog/model-driven/">Model-Driven 筆記</a>
+      <a class="article-title " href="/blog/karma/">Karma 測試框架</a>
     </h1>
   
 
@@ -136,7 +136,7 @@
             
             <div class="article-meta">
               <i class="fa fa-calendar"></i>
-              <time datetime="2016-11-13T03:12:39.000Z" itemprop="datePublished">Nov 13, 2016</time>
+              <time datetime="2017-12-07T16:00:00.000Z" itemprop="datePublished">Dec 08, 2017</time>
             </div>
           
           </header>
@@ -144,17 +144,18 @@
 
           <div class="article-entry " itemprop="articleBody">
             
-              <h2 id="Model-Driven"><a href="#Model-Driven" class="headerlink" title="Model-Driven"></a>Model-Driven</h2><h3 id="實作-Model-Driven-必須要："><a href="#實作-Model-Driven-必須要：" class="headerlink" title="實作 Model-Driven , 必須要："></a>實作 Model-Driven , 必須要：</h3><ul>
-<li>先 import <code>ReactiveFormModule</code> 到 <code>app.module.ts</code></li>
-<li>開啟 html, 在 Form 元素加上 <code>[formGroup]=&quot;form&quot;</code> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;form [formGroup]=&quot;form&quot;&gt;</span><br><span class="line"> 	...</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+              <h2 id="Angular-測試三劍客"><a href="#Angular-測試三劍客" class="headerlink" title="Angular 測試三劍客"></a>Angular 測試三劍客</h2><ul>
+<li><p>Jasmine: 提供撰寫測試所需的工具, 搭配測試運行框架在瀏覽器上執行測試。</p>
 </li>
-</ul>
+<li><p>Karma : 測試運行框架，為開發中執行 unit test 的好選擇。(紅燈、綠燈、重構)</p>
+</li>
+<li><p>Protractor: End to End Test專用。模擬使用者的操作，來判斷程式在瀏覽器上正常與否。</p>
             
           </div>
 
           
             <p class="article-more-link">
-              <a href="/blog/model-driven/#more" class="waves-effect waves-light btn red lighten-2">
+              <a href="/blog/karma/#more" class="waves-effect waves-light btn red lighten-2">
                 Read More
                 &nbsp;
                 <i class="fa fa-plus-circle"></i>
@@ -163,7 +164,7 @@
           
           
           <footer class="article-footer">
-            <a data-url="http://chrischiang410.github.io/blog/model-driven/" data-id="cjhylr0p400080wp0ucqaafsb" class="article-share-link">Share</a>
+            <a data-url="http://chrischiang410.github.io/blog/karma/" data-id="cjhylr0p200060wp0rx9997jf" class="article-share-link">Share</a>
             
             
           </footer>
@@ -182,7 +183,7 @@
       
         
 
-      <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-rxjs" class="article article-type-post" itemscope itemprop="blogPost">
 
         <div class="article-inner">
           
@@ -192,7 +193,7 @@
               
   
     <h1 itemprop="name" class="header">
-      <a class="article-title " href="/blog/hello-world/">新開幕</a>
+      <a class="article-title " href="/blog/rxjs/">RxJS - Observable 初探</a>
     </h1>
   
 
@@ -201,7 +202,7 @@
             
             <div class="article-meta">
               <i class="fa fa-calendar"></i>
-              <time datetime="2016-11-09T16:00:00.000Z" itemprop="datePublished">Nov 10, 2016</time>
+              <time datetime="2017-04-09T16:00:00.000Z" itemprop="datePublished">Apr 10, 2017</time>
             </div>
           
           </header>
@@ -209,13 +210,17 @@
 
           <div class="article-entry " itemprop="articleBody">
             
-              <p>自從無名小站關站後,就鮮少寫部落格了。<br>希望這次,透過自己建置的部落格環境,
+              <h2 id="大綱"><a href="#大綱" class="headerlink" title="大綱"></a>大綱</h2><ul>
+<li>RxJS 介紹</li>
+<li>Observable 範例 </li>
+<li>比較 Observable 與 Promise</li>
+<li>結論
             
           </div>
 
           
             <p class="article-more-link">
-              <a href="/blog/hello-world/#more" class="waves-effect waves-light btn red lighten-2">
+              <a href="/blog/rxjs/#more" class="waves-effect waves-light btn red lighten-2">
                 Read More
                 &nbsp;
                 <i class="fa fa-plus-circle"></i>
@@ -224,7 +229,85 @@
           
           
           <footer class="article-footer">
-            <a data-url="http://chrischiang410.github.io/blog/hello-world/" data-id="cjhylr0ox00020wp06nmo1f44" class="article-share-link">Share</a>
+            <a data-url="http://chrischiang410.github.io/blog/rxjs/" data-id="cjhylr0p500090wp00jgob5c7" class="article-share-link">Share</a>
+            
+            
+          </footer>
+          
+        </div>
+
+        
+      </article>
+
+
+      
+
+
+
+
+      
+        
+
+      <article id="post-jwt" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 itemprop="name" class="header">
+      <a class="article-title " href="/blog/jwt/">Json Web Token</a>
+    </h1>
+  
+
+
+          
+            
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2017-03-05T16:00:00.000Z" itemprop="datePublished">Mar 06, 2017</time>
+            </div>
+          
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <style>
+.left{
+    display:block ;
+    text-align:left ;
+}
+
+.right{
+    display:block ;
+    text-align:right ;
+}
+
+</style>
+
+<h2 id="Agenda"><a href="#Agenda" class="headerlink" title="Agenda"></a>Agenda</h2><ul>
+<li>了解 Json Web Token </li>
+<li>運作原理 </li>
+<li>Angular2 Router實作概述</li>
+</ul>
+            
+          </div>
+
+          
+            <p class="article-more-link">
+              <a href="/blog/jwt/#more" class="waves-effect waves-light btn red lighten-2">
+                Read More
+                &nbsp;
+                <i class="fa fa-plus-circle"></i>
+              </a>
+            </p>
+          
+          
+          <footer class="article-footer">
+            <a data-url="http://chrischiang410.github.io/blog/jwt/" data-id="cjhylr0p000040wp0kqse6zof" class="article-share-link">Share</a>
             
             
           </footer>

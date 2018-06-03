@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>Json Web Token | 江江好</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta name="description" content=".left{     display:block ;     text-align:left ; }  .right{     display:block ;     text-align:right ; }    Agenda 了解 Json Web Token  運作原理  Angular2 Router實作概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Json Web Token">
+<meta property="og:url" content="http://chrischiang410.github.io/blog/jwt/index.html">
+<meta property="og:site_name" content="江江好">
+<meta property="og:description" content=".left{     display:block ;     text-align:left ; }  .right{     display:block ;     text-align:right ; }    Agenda 了解 Json Web Token  運作原理  Angular2 Router實作概述">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://i.imgur.com/kC5c7wS.jpg?1">
+<meta property="og:updated_time" content="2018-06-03T07:59:24.766Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Json Web Token">
+<meta name="twitter:description" content=".left{     display:block ;     text-align:left ; }  .right{     display:block ;     text-align:right ; }    Agenda 了解 Json Web Token  運作原理  Angular2 Router實作概述">
+<meta name="twitter:image" content="http://i.imgur.com/kC5c7wS.jpg?1">
+
+  
+    <link rel="alternate" href="/atom.xml" title="江江好" type="application/atom+xml" />
+  
+
+  
+  <!--[if lte IE 10 ]><link rel="shortcut icon" href="/images/favicon.ico"><![endif]-->
+  <!--[if !IE]><!-->
+  <link rel="shortcut icon" href="/images/favicon.png">
+
+  <meta name="msapplication-TileImage" content="/images/favicon.png"/>
+  <meta name="msapplication-TileColor" content="#000000"/>
+
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon-57x57.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/apple-touch-icon-144x144.png" />
+
+  <link rel="icon" sizes="256x256" href="/images/favicon.png" />
+  <!--<![endif]-->
+  
+
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro|Material+Icons|Raleway:400,300,700" rel="stylesheet" type="text/css" />
+
+  <link rel="stylesheet" href="/css/vendors.css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+
+  <script src="/js/vendors.js"></script>
+
+  <script>
+    define('jquery', function () {
+      return window.jQuery;
+    });
+  </script>
+
+
+</head>
+<body>
+
+  <div class="navbar-fixed">
+  <nav id="main-navbar" class="grey lighten-5 z-depth-0" role="navigation">
+    <div class="nav-wrapper container">
+
+      <a id="logo-container" href="/" class="brand-logo center-align">
+        <span>江江好</span>
+        <sub>Work Hard, Play Hard</sub>
+      </a>
+
+      <ul class="right hide-on-med-and-down">
+        
+          <li>
+            <a class="main-nav-link" href="/">About</a>
+          </li>
+        
+          <li>
+            <a class="main-nav-link" href="/work">Work</a>
+          </li>
+        
+          <li>
+            <a class="main-nav-link" href="/blog">Blog</a>
+          </li>
+        
+      </ul>
+
+      <a href="#" data-activates="nav-mobile" class="button-collapse">
+        <i class="material-icons">menu</i>
+      </a>
+    </div>
+  </nav>
+</div>
+
+<ul id="nav-mobile" class="side-nav">
+  
+  <li>
+    <a class="main-nav-link" href="/">About</a>
+  </li>
+  
+  <li>
+    <a class="main-nav-link" href="/work">Work</a>
+  </li>
+  
+  <li>
+    <a class="main-nav-link" href="/blog">Blog</a>
+  </li>
+  
+</ul>
+
+
+  <div id="main-container">
+    
+<div class="container">
+  <div class="row">
+    <div class="col s12">
+
+
+      <article id="post-jwt" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 class="article-title header" itemprop="name">
+      Json Web Token
+    </h1>
+  
+
+
+          
+            
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2017-03-05T16:00:00.000Z" itemprop="datePublished">Mar 06, 2017</time>
+            </div>
+          
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <style>
+.left{
+    display:block ;
+    text-align:left ;
+}
+
+.right{
+    display:block ;
+    text-align:right ;
+}
+
+</style>
+
+<h2 id="Agenda"><a href="#Agenda" class="headerlink" title="Agenda"></a>Agenda</h2><ul>
+<li>了解 Json Web Token </li>
+<li>運作原理 </li>
+<li>Angular2 Router實作概述</li>
+</ul>
+<a id="more"></a>
+<hr>
+<h2 id="了解-Json-Web-Token"><a href="#了解-Json-Web-Token" class="headerlink" title="了解 Json Web Token"></a>了解 Json Web Token</h2><p>JWT 是一個用於安全性傳輸資訊的公開規範 (RFC 7519),<br><span class="left">特點有 ：</span></p>
+<ul>
+<li>輕巧性：採 json 格式與 Base 64編碼, size 極小, 可透過URL傳輸、post parameter 或放在 Http header</li>
+<li>獨立性：可將所需的 User資訊存入 JWT Payload中, 一次搞定 </li>
+</ul>
+<hr>
+<h2 id="了解-Json-Web-Token-1"><a href="#了解-Json-Web-Token-1" class="headerlink" title="了解 Json Web Token"></a>了解 Json Web Token</h2><p>JWT 由三串編碼所組成,分別為：</p>
+<ul>
+<li>Header</li>
+<li>Payload</li>
+<li>Signature</li>
+</ul>
+<hr>
+<h2 id="Header"><a href="#Header" class="headerlink" title="Header"></a>Header</h2><p><span class="left">編譯前：</span><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;typ&quot;: &quot;JWT&quot;,</span><br><span class="line">    &quot;alg&quot;: &quot;HS256&quot;</span><br><span class="line">&#125;</span><br><span class="line">``` </span><br><span class="line">&lt;span class=&quot;left&quot;&gt;透過 Base64 編譯後：&lt;/span&gt;</span><br><span class="line">```&lt;div&gt;</span><br><span class="line">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="Payload"><a href="#Payload" class="headerlink" title="Payload"></a>Payload</h2><p><span class="left">編譯前：</span><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"> <span class="string">"iss"</span>: <span class="string">"andyyou.github.io"</span>,</span><br><span class="line"> <span class="string">"exp"</span>: <span class="number">1465700328092</span>,</span><br><span class="line"> <span class="string">"name"</span>: <span class="string">"andyyou"</span>,</span><br><span class="line"> <span class="string">"admin"</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><span class="left">透過 Base64 編譯後：</span><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eyJpc3MiOiJKb2huIFd1IEpXVCIsImlhdCI6MTQ0MTU5MzUwMiwiZXhwIjoxNDQxNTk0NzIyLCJhdWQiOiJ3d3cuZXhhbXBsZS5jb20iLCJzdWIiOiJqcm9ja2V0QGV4YW1wbGUuY29tIiwiZnJvbV91c2VyIjoiQiIsInRhcmdldF91c2VyIjoiQSJ9</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="Payload-1"><a href="#Payload-1" class="headerlink" title="Payload"></a>Payload</h2><p><span class="left">既有格式說明：</span></p>
+<ul>
+<li><code>iss</code> ：簽發 JWT 者</li>
+<li><code>sub</code> ：訂閱 JWT 的用戶</li>
+<li><code>aud</code> ：接收 JWT 者</li>
+<li><code>exp</code> ：JWT 到期日 ( 採 timestamp 格式 )</li>
+<li><code>iat</code> ：何時簽發 JWT</li>
+</ul>
+<hr>
+<h2 id="Signature"><a href="#Signature" class="headerlink" title="Signature"></a>Signature</h2><p><span class="left">由server提供一個密鑰,以<code>secret</code>為例：</span><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var encodedString = base64UrlEncode(header) + &apos;.&apos; + base64UrlEncode(payload);</span><br><span class="line">var signature = HMACSHA256(encodedString, &apos;secret&apos;);</span><br></pre></td></tr></table></figure></p>
+<p><span class="left">透過 Base64 編譯後：</span><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">6srTK4rBbOqlWj7le2hrwFP-iayHblLdhgVFIYU3gVg</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="JWT"><a href="#JWT" class="headerlink" title="JWT"></a>JWT</h2><p>由上方三組編碼,以<code>.</code>的方式將其串接起來,便得到：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhbmR5eW91LmdpdGh1Yi5pbyIsImV4cCI6MTQ2NTcwMDMyODA5MiwibmFtZSI6ImFuZHl5b3UiLCJhZG1pbiI6dHJ1ZX0.6srTK4rBbOqlWj7le2hrwFP-iayHblLdhgVFIYU3gVg</span><br></pre></td></tr></table></figure></p>
+<p><br><br><br>此串編碼即 Json Web Token</p>
+<hr>
+<h2 id="JWT-運作原理"><a href="#JWT-運作原理" class="headerlink" title="JWT 運作原理"></a>JWT 運作原理</h2><hr>
+<ul>
+<li><p>說好的 JWT 何去何從</p>
+<p>  <img src="http://i.imgur.com/kC5c7wS.jpg?1"></p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>User 進行登入 (http post) 請求, 將帳號密碼送至 Server</p>
+</li>
+<li><p>Server驗證帳密成功後, 可將一些敏感性較低的屬性 ( 使用者id, 有效期限 ) 加入至 Payload作為其一屬性, 並結合 header 與 secret , 編譯出JWT</p>
+</li>
+<li><p>Server 返回 JWT 給 Brower, 並存放在 local 端 (一般放置於localstorage)</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li>之後 User 的每次請求, 其 Http Authorization Header 皆須附帶 JWT, Server 將依據 JWT 是否驗證成功來接受請求與否</li>
+</ul>
+<p>在 Authorization header 中, 採Bearer schema：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Authorization: Bearer &lt;token&gt;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="安全性討論"><a href="#安全性討論" class="headerlink" title="安全性討論"></a>安全性討論</h2><ul>
+<li>JWT 與 XSS</li>
+<li>JWT 與 CSRF</li>
+</ul>
+<hr>
+<h2 id="以存放位置來檢視-JWT"><a href="#以存放位置來檢視-JWT" class="headerlink" title="以存放位置來檢視 JWT"></a>以存放位置來檢視 JWT</h2><ul>
+<li>將 JWT 存放在 HTML5 Web storage？<br>– 若 JWT 存放於 localstorage 中, 需提防 Token 遭受 XSS 竊取<br>– 由於並無觸及 Cookie, 較不必擔心 CSRF 問題 </li>
+</ul>
+<hr>
+<h2 id="以存放位置來檢視-JWT-1"><a href="#以存放位置來檢視-JWT-1" class="headerlink" title="以存放位置來檢視 JWT"></a>以存放位置來檢視 JWT</h2><ul>
+<li>將 JWT 存放在 Cookie？<br>– 若 JWT 存放於 Cookie 中,可藉由 <code>HttpOnly</code> 與 <code>Secure</code> 兩種flag 強制使用 Https,能有效防範 XSS 之影響<br>– 然而,較容易遭受 CSRF 攻擊, 需透過其他 framework 來防範</li>
+</ul>
+<hr>
+<h2 id="JWT-in-Angular2"><a href="#JWT-in-Angular2" class="headerlink" title="JWT in Angular2"></a>JWT in Angular2</h2><ul>
+<li>如何使用</li>
+<li>如何與 Router 搭配</li>
+</ul>
+<hr>
+<h2 id="How-to-use-in-Angular2"><a href="#How-to-use-in-Angular2" class="headerlink" title="How to use in Angular2?"></a>How to use in Angular2?</h2><ul>
+<li><p>安裝 angular2-jwt</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install angular2-jwt</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>若採用SystemJS, 記得 map angular2-jwt</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"> System.config(&#123;</span><br><span class="line">   defaultJSExtensions: true,</span><br><span class="line">   map: &#123;</span><br><span class="line">     &quot;angular2-jwt&quot;: &quot;node_modules/angular2-jwt&quot;</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;);</span><br><span class="line"> &lt;/script&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h2 id="How-to-use-in-Angular2-1"><a href="#How-to-use-in-Angular2-1" class="headerlink" title="How to use in Angular2?"></a>How to use in Angular2?</h2><ul>
+<li><p>使用AuthHttp 取代 Http<br>AuthHttp 可傳送各種含驗證的 Http request</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import &#123;AuthHttp&#125; from &apos;angular2-jwt/angular2-jwt&apos;;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">export class AppComponent &#123;</span><br><span class="line"></span><br><span class="line">this.AuthHttp.get(...)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h2 id="with-Angular2-Router"><a href="#with-Angular2-Router" class="headerlink" title="with Angular2 Router"></a>with Angular2 Router</h2><ul>
+<li>透過lifecycle hooks來實現 router：<code>CanActivate</code></li>
+<li>藉由原生 method, 在route導引前以及component實體化前先檢查JWT<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@CanActivate(() =&gt; tokenNotExpired())</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h2 id="實例"><a href="#實例" class="headerlink" title="實例"></a>實例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import &#123;Component&#125; from &apos;angular2/core&apos;;</span><br><span class="line">import &#123;tokenNotExpired&#125; from &apos;angular2-jwt/angular2-jwt&apos;;</span><br><span class="line">import &#123;RouteConfig, ROUTER_DIRECTIVES,</span><br><span class="line">	ROUTER_PROVIDERS, CanActivate&#125; from &apos;angular2/router&apos;</span><br><span class="line"></span><br><span class="line">@Component(&#123;</span><br><span class="line">  selector: &apos;secret-route&apos;,</span><br><span class="line">  template: `&lt;h1&gt;是誰住在深海的大鳳梨裡??&lt;/h1&gt;`</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">@CanActivate(() =&gt; tokenNotExpired())</span><br><span class="line"></span><br><span class="line">export class SecretRoute &#123; &#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="補充-Angular2-內建防護"><a href="#補充-Angular2-內建防護" class="headerlink" title="補充- Angular2 內建防護"></a>補充- Angular2 內建防護</h2><ul>
+<li>防範 XSS 攻擊</li>
+<li>XSRF (CSRF)</li>
+</ul>
+<hr>
+<h2 id="防範-XSS-攻擊"><a href="#防範-XSS-攻擊" class="headerlink" title="防範 XSS 攻擊"></a>防範 XSS 攻擊</h2><ul>
+<li>Angular 為了系統性的防範 XSS, 預設所有的 value 皆為不信任的</li>
+<li>當 value 從 template 插入到 DOM 之中時, Angular將會針對特定環境的 value 進行無害化處理 (Sanitize)</li>
+<li>特定環境<br>– HTML<br>– Style<br>– URL<br>– Resource URL</li>
+</ul>
+<hr>
+<h2 id="無害化處理-Sanitize"><a href="#無害化處理-Sanitize" class="headerlink" title="無害化處理 (Sanitize)"></a>無害化處理 (Sanitize)</h2><p>假定我們有個 Html檔如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;綁定值:&lt;/p&gt;</span><br><span class="line">&lt;p class=&quot;e2e-inner-html-interpolated&quot;&gt;&#123;&#123;htmlSnippet&#125;&#125;&lt;/p&gt;&lt;br/&gt;</span><br><span class="line">&lt;p&gt;綁定至 innerHTML:&lt;/p&gt;</span><br><span class="line">&lt;p class=&quot;e2e-inner-html-bound&quot; [innerHTML]=&quot;htmlSnippet&quot;&gt;&lt;/p&gt;</span><br></pre></td></tr></table></figure></p>
+<p>而 Component 如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">InnerHtmlBindingComponent</span> </span>&#123;</span><br><span class="line">  htmlSnippet = <span class="string">'Template &lt;script&gt;alert("HeyYo")&lt;/ script&gt;'</span> ; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="無害化處理-Sanitize-1"><a href="#無害化處理-Sanitize-1" class="headerlink" title="無害化處理 (Sanitize)"></a>無害化處理 (Sanitize)</h2><p>其輸出結果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">綁定值: </span><br><span class="line">Template &lt;script&gt;alert(&quot;HeyYo&quot;)&lt;/ script&gt;</span><br><span class="line"></span><br><span class="line">綁定至 innerHTML:</span><br><span class="line">Template alert(&quot;HeyYo&quot;)</span><br></pre></td></tr></table></figure></p>
+<p>script tag 將自動被濾掉!!</p>
+<hr>
+<h2 id="信任值"><a href="#信任值" class="headerlink" title="信任值"></a>信任值</h2><p><span class="left">有時後, 應用程式還是需要包含可執行的程式碼(ex: iframe)。為了避免被無害化處理,需要透過一些手段讓 Angular明白。<br>注入 DomSanitizationService 後, 調用以下所提供的method便可略過無害化處理：<br> – bypassSecurityTrustHtml<br> – bypassSecurityTrustScript<br> – bypassSecurityTrustStyle<br> – bypassSecurityTrustUrl<br> – bypassSecurityTrustResourceUrlDF</span></p>
+<hr>
+<h2 id="信任值-1"><a href="#信任值-1" class="headerlink" title="信任值"></a>信任值</h2><p><span class="left">範例：</span><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">constructor</span>(private sanitizer: DomSanitizationService) &#123;</span><br><span class="line">  <span class="comment">// 透過 service 將 URL 轉成信任的值</span></span><br><span class="line">  <span class="keyword">this</span>.dangerousUrl = <span class="string">'javascript:alert("Hi there")'</span>;</span><br><span class="line">  <span class="keyword">this</span>.trustedUrl = sanitizer.bypassSecurityTrustUrl(<span class="keyword">this</span>.dangerousUrl);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="防範-CSRF-攻擊"><a href="#防範-CSRF-攻擊" class="headerlink" title="防範 CSRF 攻擊"></a>防範 CSRF 攻擊</h2><ul>
+<li>Angular 的 http client端內建的 CookieXSRFStrategy 會自動尋找叫做 XSFR-TOKEN 的 cookie</li>
+<li>在每個 request header中,設定一個叫做 X-XSRF-TOKEN 的 HTTP request header,並且 assign value 給該 cookie。 Server必須設定 XSRF-TOKEN cookie,並驗證每個 request header</li>
+</ul>
+<hr>
+<h2 id="防範-CSRF-攻擊-1"><a href="#防範-CSRF-攻擊-1" class="headerlink" title="防範 CSRF 攻擊"></a>防範 CSRF 攻擊</h2><ul>
+<li>Angular app 可透過 CookieXSRFStrategy 值來自訂 cookie 和 HTTP header , 也可以依照自訂class 來使用 XSRFStrategy ， 只要把以下程式加入 provider 啟動即可：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123; provide: XSRFStrategy, useValue: new CookieXSRFStrategy(&apos;myCookieName&apos;, &apos;My-Header-Name&apos;)&#125;</span><br><span class="line">&#123; provide: XSRFStrategy, useClass: MyXSRFStrategy&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><ul>
+<li>JWT 遵循網際網路協定規範 (RFC 7519) </li>
+<li>與現有 Access Token 並無衝突</li>
+<li>較敏感的資訊可考慮夾帶在JWT Payload中</li>
+<li>各語言如 .NET, Python, Node.js, Java, PHP, Ruby, Go, JavaScript, and Haskell …等皆support</li>
+<li>與Angular2 搭配來實現 Router功能相當好上手 </li>
+<li>視需求決定採用與否</li>
+</ul>
+
+            
+          </div>
+
+          
+          
+          <footer class="article-footer">
+            <a data-url="http://chrischiang410.github.io/blog/jwt/" data-id="cjhylr0p000040wp0kqse6zof" class="article-share-link">Share</a>
+            
+            
+          </footer>
+          
+        </div>
+
+        
+          
+<nav id="article-nav" class="white">
+  <div class="nav-wrapper">
+    <ul class="row">
+    
+      <li class="col s6">
+        <a href="/blog/rxjs/" id="article-nav-newer" class="article-nav-link-wrap grey-text text-darken-1 truncate">
+          <i class="fa fa-arrow-left"></i>
+          <span class="article-nav-title">RxJS - Observable 初探</span>
+        </a>
+      </li>
+    
+
+    
+      <li class="col s6">
+        <a href="/blog/model-driven/" id="article-nav-older" class="article-nav-link-wrap grey-text text-darken-1 right-align truncate">
+          <span class="article-nav-title">Model-Driven 筆記</span>
+          <i class="fa fa-arrow-right"></i>
+        </a>
+      </li>
+    
+
+    </ul>
+  </div>
+</nav>
+
+
+        
+      </article>
+
+
+      
+
+
+
+    </div>
+  </div>
+</div>
+
+
+  
+
+
+
+  </div>
+
+  <footer class="page-footer grey darken-2">
+    <div class="footer-copyright">
+      <div class="container">
+        &copy; 2018
+
+        <div class="right">
+          Powered by Chris Chiang
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/app.js"></script>
+
+</body>
+</html>
